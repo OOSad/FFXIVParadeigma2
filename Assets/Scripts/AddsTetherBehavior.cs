@@ -8,9 +8,9 @@ using UnityEngine;
 
 public class AddsTetherBehavior : MonoBehaviour
 {
-    List<GameObject> addsTether;
-    List<GameObject> waypoints;
-    List<GameObject> partyMembers;
+    public List<GameObject> addsTether;
+    public List<GameObject> waypoints;
+    public List<GameObject> partyMembers;
     int selectedSet;
     int addsTravelTime;
     float globalTimer;
@@ -18,31 +18,8 @@ public class AddsTetherBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        addsTether = new List<GameObject>();
-        waypoints = new List<GameObject>();
-        partyMembers = new List<GameObject>();
         selectedSet = UnityEngine.Random.Range(0, 2);
         addsTravelTime = 50;
-
-        for (int i = 0; i < GameObject.FindGameObjectsWithTag("AddsTether").Count(); i++)
-        {
-            addsTether.Add(GameObject.FindGameObjectsWithTag("AddsTether")[i]);
-        }
-
-        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Waypoint").Count(); i++)
-        {
-            waypoints.Add(GameObject.FindGameObjectsWithTag("Waypoint")[i]);
-        }
-
-        for (int i = 0; i < GameObject.FindGameObjectsWithTag("PartyMember").Count(); i++)
-        
-        {
-            partyMembers.Add(GameObject.FindGameObjectsWithTag("PartyMember")[i]);
-        }
-
-        addsTether = addsTether.OrderBy(go => go.name).ToList();
-        waypoints = waypoints.OrderBy(go => go.name).ToList();
-        partyMembers = partyMembers.OrderBy(go => go.name).ToList();
     }
 
     // Update is called once per frame
