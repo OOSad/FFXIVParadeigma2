@@ -10,6 +10,7 @@ public class AddsTetherBehavior : MonoBehaviour
 {
     List<GameObject> addsTether;
     List<GameObject> waypoints;
+    List<GameObject> partyMembers;
     int selectedSet;
     int addsTravelTime;
     float globalTimer;
@@ -19,6 +20,7 @@ public class AddsTetherBehavior : MonoBehaviour
     {
         addsTether = new List<GameObject>();
         waypoints = new List<GameObject>();
+        partyMembers = new List<GameObject>();
         selectedSet = UnityEngine.Random.Range(0, 2);
         addsTravelTime = 50;
 
@@ -32,9 +34,15 @@ public class AddsTetherBehavior : MonoBehaviour
             waypoints.Add(GameObject.FindGameObjectsWithTag("Waypoint")[i]);
         }
 
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("PartyMember").Count(); i++)
+        
+        {
+            partyMembers.Add(GameObject.FindGameObjectsWithTag("PartyMember")[i]);
+        }
+
         addsTether = addsTether.OrderBy(go => go.name).ToList();
         waypoints = waypoints.OrderBy(go => go.name).ToList();
-
+        partyMembers = partyMembers.OrderBy(go => go.name).ToList();
     }
 
     // Update is called once per frame
@@ -61,6 +69,11 @@ public class AddsTetherBehavior : MonoBehaviour
                 addsTether[2].transform.position = Vector3.MoveTowards(addsTether[2].transform.position, waypoints[5].transform.position, addsTravelTime * Time.deltaTime);
                 addsTether[3].transform.position = Vector3.MoveTowards(addsTether[3].transform.position, waypoints[7].transform.position, addsTravelTime * Time.deltaTime);
             }
+
+        }
+
+        if (globalTimer >= 6)
+        {
 
         }
         
