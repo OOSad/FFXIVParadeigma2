@@ -11,6 +11,9 @@ public class AddsTetherBehavior : MonoBehaviour
     public List<GameObject> addsTether;
     public List<GameObject> waypoints;
     public List<GameObject> partyMembers;
+    List<GameObject> partyMembersSelectedForTethers;
+    public List<LineRenderer> DarkTethersThatAreTooClose;
+
     int selectedSet;
     int addsTravelTime;
     float globalTimer;
@@ -20,6 +23,21 @@ public class AddsTetherBehavior : MonoBehaviour
     {
         selectedSet = UnityEngine.Random.Range(0, 2);
         addsTravelTime = 50;
+        
+        partyMembersSelectedForTethers = new List<GameObject>();
+
+        while(partyMembersSelectedForTethers.Count < 4)
+        {
+            int randomNumber = UnityEngine.Random.Range(0, 8);
+
+            if (!partyMembersSelectedForTethers.Contains(partyMembers[randomNumber]))
+            {
+                partyMembersSelectedForTethers.Add(partyMembers[randomNumber]);
+            }
+        }
+
+        DarkTethersThatAreTooClose[0].positionCount = 2;
+        DarkTethersThatAreTooClose[1].positionCount = 2;
     }
 
     // Update is called once per frame
@@ -51,7 +69,22 @@ public class AddsTetherBehavior : MonoBehaviour
 
         if (globalTimer >= 6)
         {
+            if (UnityEngine.Vector3.Distance(addsTether[0].transform.position, partyMembersSelectedForTethers[0].transform.position) < 50)
+            {
+                DarkTethersThatAreTooClose[0].SetPosition(0, addsTether[0].transform.position);
+                DarkTethersThatAreTooClose[0].SetPosition(1, partyMembersSelectedForTethers[0].transform.position);
+            }
 
+            else
+            {
+                
+            }
+
+            if (UnityEngine.Vector3.Distance(addsTether[1].transform.position, partyMembersSelectedForTethers[1].transform.position) < 50)
+            {
+                DarkTethersThatAreTooClose[1].SetPosition(0, addsTether[1].transform.position);
+                DarkTethersThatAreTooClose[1].SetPosition(1, partyMembersSelectedForTethers[1].transform.position);
+            }
         }
         
         
